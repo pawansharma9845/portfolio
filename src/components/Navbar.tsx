@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import GooeyNavbar from "./GooeyNavbar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,30 +38,34 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, type: "spring" }}
-          >
-            <NavLink to="/" className="text-xl font-bold text-white">
-              Portfolio
-            </NavLink>
-          </motion.div>
+          <NavLink to="/" className="text-xl font-bold text-white">
+            Portfolio
+          </NavLink>
 
-          {/* Desktop menu with gooey effect */}
-          <div className="hidden md:block">
-            <GooeyNavbar navLinks={navLinks} closeMenu={closeMenu} />
+          {/* Desktop menu */}
+          <div className="hidden md:flex space-x-10">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active-nav-link" : ""}`
+                }
+                onClick={closeMenu}
+              >
+                {link.name}
+              </NavLink>
+            ))}
           </div>
 
           {/* Mobile menu button */}
-          <motion.button
+          <button
             className="md:hidden text-white focus:outline-none"
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            whileTap={{ scale: 0.9 }}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
+          </button>
         </nav>
 
         {/* Mobile menu */}
