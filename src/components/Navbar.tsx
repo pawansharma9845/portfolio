@@ -76,9 +76,9 @@ const Navbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden mt-2"
+              className="md:hidden mt-2 bg-black bg-opacity-60 backdrop-blur-sm rounded-lg"
             >
-              <div className="flex flex-col space-y-4 py-4">
+              <div className="flex flex-col space-y-4 py-4 px-4">
                 {navLinks.map((link) => (
                   <NavLink
                     key={link.name}

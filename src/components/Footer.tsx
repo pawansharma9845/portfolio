@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <NavLink to="/" className="text-xl font-bold">Portfolio</NavLink>
-            <p className="text-gray-400 mt-2">© {new Date().getFullYear()} John Doe. All rights reserved.</p>
+            <p className="text-gray-400 mt-2">© {new Date().getFullYear()} Pawan Sharma. All rights reserved.</p>
           </div>
           
           <div className="flex flex-col md:flex-row md:items-center gap-6">

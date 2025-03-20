@@ -15,12 +15,12 @@ const skills = [
   },
   { 
     category: "Database", 
-    items: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Firebase"],
+    items: ["MySQL"],
     icon: <Database className="text-purple w-6 h-6" />
   },
   { 
     category: "DevOps", 
-    items: ["Docker", "Kubernetes", "AWS", "CI/CD", "Git", "Linux"],
+    items: ["AWS", "CI/CD", "Git", "Linux"],
     icon: <Terminal className="text-purple w-6 h-6" />
   }
 ];
