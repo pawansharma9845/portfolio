@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Code, Sparkles } from 'lucide-react';
 
 interface ProjectCardProps {
   title: string;
@@ -27,6 +27,7 @@ const ProjectCard = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -10 }}
     >
       <div className="relative overflow-hidden group">
         <img 
@@ -40,9 +41,10 @@ const ProjectCard = ({
               href={githubUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-3 bg-black bg-opacity-60 rounded-full hover:bg-purple transition-colors duration-300"
+              className="p-3 bg-black bg-opacity-60 rounded-full hover:bg-purple transition-colors duration-300 flex items-center gap-2"
             >
               <Github size={20} />
+              <span className="text-sm hidden md:inline">Code</span>
             </a>
           )}
           {liveUrl && (
@@ -50,24 +52,29 @@ const ProjectCard = ({
               href={liveUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-3 bg-black bg-opacity-60 rounded-full hover:bg-purple transition-colors duration-300"
+              className="p-3 bg-black bg-opacity-60 rounded-full hover:bg-purple transition-colors duration-300 flex items-center gap-2"
             >
               <ExternalLink size={20} />
+              <span className="text-sm hidden md:inline">Live</span>
             </a>
           )}
         </div>
       </div>
       
       <div className="glass p-6 flex-1 flex flex-col">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <div className="flex items-center mb-2">
+          <Sparkles className="text-purple w-5 h-5 mr-2" />
+          <h3 className="text-xl font-semibold">{title}</h3>
+        </div>
         <p className="text-gray-300 mb-4 flex-1">{description}</p>
         
         <div className="flex flex-wrap gap-2 mt-auto">
           {technologies.map((tech, i) => (
             <span 
               key={i} 
-              className="text-sm px-3 py-1 bg-black bg-opacity-30 rounded-full"
+              className="text-sm px-3 py-1 bg-black bg-opacity-30 rounded-full flex items-center"
             >
+              <Code size={12} className="mr-1" />
               {tech}
             </span>
           ))}

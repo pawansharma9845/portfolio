@@ -44,10 +44,11 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <p className="text-purple mb-3 reveal">Hello! I'm</p>
-            <h2 className="text-4xl font-bold mb-6 reveal">John Doe</h2>
-            <h3 className="text-2xl font-semibold mb-6 text-gray-300 reveal">Software Developer</h3>
+            <h2 className="text-4xl font-bold mb-6 reveal">Pawan Sharma</h2>
+            <h3 className="text-2xl font-semibold mb-6 text-gray-300 reveal">IT Student & Developer</h3>
             
             <p className="text-gray-300 mb-8 reveal">
+              I'm a 20-year-old IT student from Bharatpur-4, Chitwan, Nepal. 
               I specialize in building modern, responsive web applications with React and TypeScript.
               With a passion for clean code and user experience, I create digital solutions that make a difference.
             </p>

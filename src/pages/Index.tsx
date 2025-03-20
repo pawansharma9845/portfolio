@@ -16,14 +16,6 @@ const projectsData = [
     technologies: ["React", "TypeScript", "Tailwind"],
     githubUrl: "#",
     liveUrl: "#"
-  },
-  {
-    title: "Fitness Tracker App",
-    description: "Mobile application to track workouts, nutrition, and progress towards fitness goals",
-    imageUrl: "https://images.unsplash.com/photo-1591311599627-b93806d23e94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80",
-    technologies: ["React Native", "Firebase", "Redux"],
-    githubUrl: "#",
-    liveUrl: "#"
   }
 ];
 
@@ -60,12 +52,12 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              Hello, I'm John Doe
+              Hello, I'm Pawan Sharma
             </motion.div>
           </div>
           
           <AnimatedTitle 
-            title="Software Developer" 
+            title="IT Student & Developer" 
             subtitle="Transforming ideas into interactive and seamless digital experiences with cutting-edge frontend development."
             className="mx-auto max-w-3xl"
             delay={100}
@@ -106,18 +98,18 @@ const Index = () => {
           <div className="flex justify-between items-end mb-12">
             <div>
               <p className="text-purple mb-2 reveal">My work</p>
-              <h2 className="text-3xl font-bold reveal">Featured Projects</h2>
+              <h2 className="text-3xl font-bold reveal">Featured Project</h2>
             </div>
             <Link 
               to="/projects" 
               className="text-purple hover:text-purple-light transition-colors duration-300 flex items-center reveal"
             >
-              View All
+              View Details
               <ArrowRight size={16} className="ml-1" />
             </Link>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="max-w-3xl mx-auto">
             {projectsData.map((project, index) => (
               <ProjectCard key={index} {...project} index={index} />
             ))}
