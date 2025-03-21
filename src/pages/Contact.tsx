@@ -1,12 +1,23 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { MapPin, Mail, Phone } from 'lucide-react';
 import AnimatedTitle from '../components/AnimatedTitle';
 import ContactForm from '../components/ContactForm';
 
 const Contact = () => {
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
+  const lastScrollTop = useRef(0);
+  
   useEffect(() => {
     const handleScroll = () => {
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop.current) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('up');
+      }
+      lastScrollTop.current = st <= 0 ? 0 : st;
+      
       const reveals = document.querySelectorAll('.reveal');
       
       reveals.forEach(reveal => {
@@ -15,6 +26,13 @@ const Contact = () => {
         
         if (revealTop < window.innerHeight - revealPoint) {
           reveal.classList.add('active');
+          
+          // Add direction-based animation class
+          if (scrollDirection === 'up') {
+            reveal.classList.add('reverse-animate');
+          } else {
+            reveal.classList.remove('reverse-animate');
+          }
         }
       });
     };
@@ -23,7 +41,7 @@ const Contact = () => {
     handleScroll(); // Initial check on mount
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [scrollDirection]);
   
   return (
     <div className="pt-28 pb-20">

@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AnimatedTitle from '../components/AnimatedTitle';
 import ProjectCard from '../components/ProjectCard';
 
@@ -15,8 +15,19 @@ const projectsData = [
 ];
 
 const Projects = () => {
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
+  const lastScrollTop = useRef(0);
+  
   useEffect(() => {
     const handleScroll = () => {
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop.current) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('up');
+      }
+      lastScrollTop.current = st <= 0 ? 0 : st;
+      
       const reveals = document.querySelectorAll('.reveal');
       
       reveals.forEach(reveal => {
@@ -25,6 +36,16 @@ const Projects = () => {
         
         if (revealTop < window.innerHeight - revealPoint) {
           reveal.classList.add('active');
+          
+          // Add scroll direction class for reverse animation
+          if (scrollDirection === 'up') {
+            reveal.classList.add('reverse-animate');
+          } else {
+            reveal.classList.remove('reverse-animate');
+          }
+        } else {
+          // Optional: Remove active class when element is out of viewport
+          // reveal.classList.remove('active');
         }
       });
     };
@@ -33,7 +54,7 @@ const Projects = () => {
     handleScroll(); // Initial check on mount
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [scrollDirection]);
   
   return (
     <div className="pt-28 pb-20">
