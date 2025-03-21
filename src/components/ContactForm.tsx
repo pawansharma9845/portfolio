@@ -56,7 +56,7 @@ const ContactForm = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <Label htmlFor="name" className="block mb-2 text-sm font-medium">Name</Label>
+        <Label htmlFor="name">Name</Label>
         <Input
           type="text"
           id="name"
@@ -64,13 +64,12 @@ const ContactForm = () => {
           required
           value={formData.name}
           onChange={handleChange}
-          className="w-full p-3 bg-black bg-opacity-30 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple focus:border-transparent transition-all duration-200"
           placeholder="Your name"
         />
       </div>
       
       <div className="mb-6">
-        <Label htmlFor="email" className="block mb-2 text-sm font-medium">Email</Label>
+        <Label htmlFor="email">Email</Label>
         <Input
           type="email"
           id="email"
@@ -78,13 +77,12 @@ const ContactForm = () => {
           required
           value={formData.email}
           onChange={handleChange}
-          className="w-full p-3 bg-black bg-opacity-30 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple focus:border-transparent transition-all duration-200"
           placeholder="your.email@example.com"
         />
       </div>
       
       <div className="mb-6">
-        <Label htmlFor="message" className="block mb-2 text-sm font-medium">Message</Label>
+        <Label htmlFor="message">Message</Label>
         <Textarea
           id="message"
           name="message"
@@ -92,7 +90,6 @@ const ContactForm = () => {
           required
           value={formData.message}
           onChange={handleChange}
-          className="w-full p-3 bg-black bg-opacity-30 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple focus:border-transparent transition-all duration-200"
           placeholder="Your message..."
         />
       </div>
@@ -100,7 +97,8 @@ const ContactForm = () => {
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-3 px-6 text-center text-white bg-purple hover:bg-purple-light rounded-lg transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+        variant="default"
+        className="w-full"
       >
         {isSubmitting ? "Sending..." : "Submit"}
       </Button>
