@@ -8,7 +8,8 @@ import {
   Cpu, 
   Database, 
   Terminal, 
-  Code2
+  Code2,
+  Sparkle
 } from 'lucide-react';
 
 // Updated skills with cool icon components and fewer items
@@ -17,36 +18,76 @@ const skills = [
     category: "Frontend", 
     items: ["React", "Vue.js", "Angular", "HTML/CSS", "JavaScript", "TypeScript"],
     icon: (props: any) => (
-      <div className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple">
+      <motion.div 
+        className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple"
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        initial={{ opacity: 0.8 }}
+        animate={{ 
+          boxShadow: ["0 0 0 rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.5)", "0 0 0 rgba(139, 92, 246, 0)"],
+        }}
+        transition={{ 
+          boxShadow: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+        }}
+      >
         <Braces className="w-full h-full text-purple group-hover:text-white" {...props} />
-      </div>
+      </motion.div>
     )
   },
   { 
     category: "Backend", 
     items: ["Node.js", "Express", "NestJS", "Python", "Django", "Ruby on Rails"],
     icon: (props: any) => (
-      <div className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple">
+      <motion.div 
+        className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple"
+        whileHover={{ scale: 1.1, rotate: -5 }}
+        initial={{ opacity: 0.8 }}
+        animate={{ 
+          boxShadow: ["0 0 0 rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.5)", "0 0 0 rgba(139, 92, 246, 0)"],
+        }}
+        transition={{ 
+          boxShadow: { repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.5 }
+        }}
+      >
         <Server className="w-full h-full text-purple group-hover:text-white" {...props} />
-      </div>
+      </motion.div>
     )
   },
   { 
     category: "Database", 
     items: ["MySQL"],
     icon: (props: any) => (
-      <div className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple">
+      <motion.div 
+        className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple"
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        initial={{ opacity: 0.8 }}
+        animate={{ 
+          boxShadow: ["0 0 0 rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.5)", "0 0 0 rgba(139, 92, 246, 0)"],
+        }}
+        transition={{ 
+          boxShadow: { repeat: Infinity, duration: 2, ease: "easeInOut", delay: 1 }
+        }}
+      >
         <Database className="w-full h-full text-purple group-hover:text-white" {...props} />
-      </div>
+      </motion.div>
     )
   },
   { 
     category: "DevOps", 
     items: ["AWS", "CI/CD", "Git", "Linux"],
     icon: (props: any) => (
-      <div className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple">
+      <motion.div 
+        className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple"
+        whileHover={{ scale: 1.1, rotate: -5 }}
+        initial={{ opacity: 0.8 }}
+        animate={{ 
+          boxShadow: ["0 0 0 rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.5)", "0 0 0 rgba(139, 92, 246, 0)"],
+        }}
+        transition={{ 
+          boxShadow: { repeat: Infinity, duration: 2, ease: "easeInOut", delay: 1.5 }
+        }}
+      >
         <Terminal className="w-full h-full text-purple group-hover:text-white" {...props} />
-      </div>
+      </motion.div>
     )
   }
 ];
@@ -127,15 +168,38 @@ const SkillsSection = () => {
   return (
     <section ref={sectionRef} className="py-20 bg-black bg-opacity-20">
       <div className="container mx-auto px-6">
-        <motion.h2 
-          className="text-3xl font-bold text-center mb-12 reveal"
+        <motion.div
+          className="mb-12 flex items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          What I do?
-        </motion.h2>
+          <motion.h2 
+            className="text-3xl font-bold text-center reveal relative inline-block"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            What I do?
+            <motion.span
+              className="absolute -right-8 -top-4 text-purple"
+              animate={{ 
+                rotate: [0, 10, 0, -10, 0], 
+                scale: [1, 1.2, 1, 1.2, 1],
+                opacity: [0.7, 1, 0.7]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity, 
+                repeatType: "loop" 
+              }}
+            >
+              <Sparkle size={20} />
+            </motion.span>
+          </motion.h2>
+        </motion.div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skills.map((skillGroup, groupIndex) => (
@@ -149,10 +213,20 @@ const SkillsSection = () => {
               style={{ animationDelay: `${groupIndex * 0.1}s` }}
               whileHover={{ y: -10 }}
             >
-              <div className="glass rounded-lg p-6 h-full border border-transparent hover:border-purple transition-all duration-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+              <motion.div 
+                className="glass rounded-lg p-6 h-full border border-transparent hover:border-purple transition-all duration-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+                whileHover={{
+                  boxShadow: "0 0 30px rgba(139, 92, 246, 0.5)",
+                }}
+              >
                 <div className="flex items-start mb-6">
                   {skillGroup.icon({})}
-                  <h3 className="text-xl font-semibold ml-3 text-purple pt-2">{skillGroup.category}</h3>
+                  <motion.h3 
+                    className="text-xl font-semibold ml-3 text-purple pt-2"
+                    whileHover={{ x: 5 }}
+                  >
+                    {skillGroup.category}
+                  </motion.h3>
                 </div>
                 <ul className="space-y-3">
                   {skillGroup.items.map((skill, index) => (
@@ -163,13 +237,21 @@ const SkillsSection = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
                       viewport={{ once: true }}
+                      whileHover={{ 
+                        x: 5, 
+                        color: "#9b87f5",
+                        transition: { duration: 0.2 } 
+                      }}
                     >
-                      <span className="w-2 h-2 bg-purple rounded-full mr-2"></span>
+                      <motion.span 
+                        className="w-2 h-2 bg-purple rounded-full mr-2"
+                        whileHover={{ scale: 1.5 }}
+                      ></motion.span>
                       <span className="transition-transform duration-300 hover:translate-x-1 hover:text-purple-light">{skill}</span>
                     </motion.li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

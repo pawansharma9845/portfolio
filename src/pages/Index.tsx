@@ -65,10 +65,11 @@ const Index = () => {
         <div className="container mx-auto text-center">
           <div className="mb-4 inline-block">
             <motion.div 
-              className="text-purple text-lg inline-block py-1 px-3 glass rounded-full mb-2"
+              className="text-purple text-lg inline-block py-1 px-3 glass rounded-full mb-2 transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.7)] hover:bg-purple hover:text-white cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.05 }}
             >
               Hello, I'm Pawan Sharma
             </motion.div>
