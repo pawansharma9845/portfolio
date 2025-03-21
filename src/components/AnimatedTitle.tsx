@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface AnimatedTitleProps {
   title: string;
@@ -21,22 +22,32 @@ const AnimatedTitle = ({ title, subtitle, className = "", delay = 0 }: AnimatedT
   
   return (
     <div className={`${className}`}>
-      <h1 
-        className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 
-                   transition-all duration-1000 ease-out transform
-                   ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      <motion.h1 
+        className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ 
+          duration: 0.8,
+          delay: delay / 1000,
+          ease: [0.19, 1.0, 0.22, 1.0]
+        }}
       >
         {title}
-      </h1>
+      </motion.h1>
       
       {subtitle && (
-        <p 
-          className={`text-lg md:text-xl text-gray-300 mt-4 max-w-2xl
-                     transition-all duration-1000 delay-200 ease-out transform
-                     ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        <motion.p 
+          className="text-lg md:text-xl text-gray-300 mt-4 max-w-2xl mx-auto text-justify"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.8,
+            delay: (delay / 1000) + 0.2,
+            ease: [0.19, 1.0, 0.22, 1.0]
+          }}
         >
           {subtitle}
-        </p>
+        </motion.p>
       )}
     </div>
   );

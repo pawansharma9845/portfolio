@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -20,8 +20,19 @@ const projectsData = [
 ];
 
 const Index = () => {
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+  
   useEffect(() => {
     const handleScroll = () => {
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('up');
+      }
+      setLastScrollTop(st <= 0 ? 0 : st);
+      
       const reveals = document.querySelectorAll('.reveal');
       
       reveals.forEach(reveal => {
@@ -30,6 +41,13 @@ const Index = () => {
         
         if (revealTop < window.innerHeight - revealPoint) {
           reveal.classList.add('active');
+          
+          // Add scroll direction class
+          if (scrollDirection === 'up') {
+            reveal.classList.add('reverse-animate');
+          } else {
+            reveal.classList.remove('reverse-animate');
+          }
         }
       });
     };
@@ -38,7 +56,7 @@ const Index = () => {
     handleScroll(); // Initial check on mount
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollTop, scrollDirection]);
   
   return (
     <div className="pt-28">
@@ -71,14 +89,14 @@ const Index = () => {
           >
             <Link 
               to="/projects" 
-              className="px-6 py-3 bg-purple hover:bg-purple-light text-white rounded-lg transition-colors duration-300 flex items-center"
+              className="px-6 py-3 bg-purple hover:bg-purple-light text-white rounded-lg transition-all duration-300 flex items-center hover:shadow-[0_0_15px_rgba(139,92,246,0.5)] hover:translate-y-[-3px]"
             >
               View Projects
               <ArrowRight size={18} className="ml-2" />
             </Link>
             <Link 
               to="/contact" 
-              className="px-6 py-3 border border-gray-700 hover:border-purple text-white rounded-lg transition-colors duration-300"
+              className="px-6 py-3 border border-gray-700 hover:border-purple text-white rounded-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:translate-y-[-3px]"
             >
               Contact Me
             </Link>
@@ -97,16 +115,39 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <p className="text-purple mb-2 reveal">My work</p>
-              <h2 className="text-3xl font-bold reveal">Featured Project</h2>
+              <motion.p 
+                className="text-purple mb-2 reveal"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                My work
+              </motion.p>
+              <motion.h2 
+                className="text-3xl font-bold reveal"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                Featured Project
+              </motion.h2>
             </div>
-            <Link 
-              to="/projects" 
-              className="text-purple hover:text-purple-light transition-colors duration-300 flex items-center reveal"
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
             >
-              View Details
-              <ArrowRight size={16} className="ml-1" />
-            </Link>
+              <Link 
+                to="/projects" 
+                className="text-purple hover:text-purple-light transition-all duration-300 flex items-center reveal icon-glow hover:translate-x-1"
+              >
+                View Details
+                <ArrowRight size={16} className="ml-1" />
+              </Link>
+            </motion.div>
           </div>
           
           <div className="max-w-3xl mx-auto">
