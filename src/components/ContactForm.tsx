@@ -2,6 +2,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
+import { Button } from './ui/button';
+import { Label } from './ui/label';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -20,12 +24,27 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast.success("Message sent successfully!");
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+    try {
+      const response = await fetch('https://formspree.io/f/xldjjdqp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        toast.success("Message sent successfully!");
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again later.");
+      console.error("Form submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
@@ -37,8 +56,8 @@ const ContactForm = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
-        <input
+        <Label htmlFor="name" className="block mb-2 text-sm font-medium">Name</Label>
+        <Input
           type="text"
           id="name"
           name="name"
@@ -51,8 +70,8 @@ const ContactForm = () => {
       </div>
       
       <div className="mb-6">
-        <label htmlFor="email" className="block mb-2 text-sm font-medium">Email</label>
-        <input
+        <Label htmlFor="email" className="block mb-2 text-sm font-medium">Email</Label>
+        <Input
           type="email"
           id="email"
           name="email"
@@ -65,8 +84,8 @@ const ContactForm = () => {
       </div>
       
       <div className="mb-6">
-        <label htmlFor="message" className="block mb-2 text-sm font-medium">Message</label>
-        <textarea
+        <Label htmlFor="message" className="block mb-2 text-sm font-medium">Message</Label>
+        <Textarea
           id="message"
           name="message"
           rows={5}
@@ -78,13 +97,13 @@ const ContactForm = () => {
         />
       </div>
       
-      <button
+      <Button
         type="submit"
         disabled={isSubmitting}
         className="w-full py-3 px-6 text-center text-white bg-purple hover:bg-purple-light rounded-lg transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {isSubmitting ? "Sending..." : "Submit"}
-      </button>
+      </Button>
     </motion.form>
   );
 };
