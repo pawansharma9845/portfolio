@@ -2,10 +2,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
-import { Button } from './ui/button';
-import { Label } from './ui/label';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -24,27 +20,12 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    try {
-      const response = await fetch('https://formspree.io/f/xldjjdqp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      
-      if (response.ok) {
-        toast.success("Message sent successfully!");
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        toast.error("Failed to send message. Please try again.");
-      }
-    } catch (error) {
-      toast.error("An error occurred. Please try again later.");
-      console.error("Form submission error:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    toast.success("Message sent successfully!");
+    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(false);
   };
   
   return (
@@ -56,52 +37,54 @@ const ContactForm = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <Label htmlFor="name">Name</Label>
-        <Input
+        <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
+        <input
           type="text"
           id="name"
           name="name"
           required
           value={formData.name}
           onChange={handleChange}
+          className="w-full p-3 bg-black bg-opacity-30 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple focus:border-transparent transition-all duration-200"
           placeholder="Your name"
         />
       </div>
       
       <div className="mb-6">
-        <Label htmlFor="email">Email</Label>
-        <Input
+        <label htmlFor="email" className="block mb-2 text-sm font-medium">Email</label>
+        <input
           type="email"
           id="email"
           name="email"
           required
           value={formData.email}
           onChange={handleChange}
+          className="w-full p-3 bg-black bg-opacity-30 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple focus:border-transparent transition-all duration-200"
           placeholder="your.email@example.com"
         />
       </div>
       
       <div className="mb-6">
-        <Label htmlFor="message">Message</Label>
-        <Textarea
+        <label htmlFor="message" className="block mb-2 text-sm font-medium">Message</label>
+        <textarea
           id="message"
           name="message"
           rows={5}
           required
           value={formData.message}
           onChange={handleChange}
+          className="w-full p-3 bg-black bg-opacity-30 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple focus:border-transparent transition-all duration-200"
           placeholder="Your message..."
         />
       </div>
       
-      <Button
+      <button
         type="submit"
         disabled={isSubmitting}
-        variant="default"
-        className="w-full"
+        className="w-full py-3 px-6 text-center text-white bg-purple hover:bg-purple-light rounded-lg transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {isSubmitting ? "Sending..." : "Submit"}
-      </Button>
+      </button>
     </motion.form>
   );
 };
