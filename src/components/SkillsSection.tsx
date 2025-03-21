@@ -53,16 +53,17 @@ const skills = [
 
 const SkillsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [scrollDirection, setScrollDirection] = useRef<'down' | 'up'>('down');
+  // Fixed: Changed destructured useRef to regular useRef assignment
+  const scrollDirectionRef = useRef<'down' | 'up'>('down');
   const lastScrollTop = useRef<number>(0);
   
   useEffect(() => {
     const handleScroll = () => {
       const st = window.pageYOffset || document.documentElement.scrollTop;
       if (st > lastScrollTop.current) {
-        setScrollDirection.current = 'down';
+        scrollDirectionRef.current = 'down';
       } else {
-        setScrollDirection.current = 'up';
+        scrollDirectionRef.current = 'up';
       }
       lastScrollTop.current = st <= 0 ? 0 : st;
       
@@ -76,7 +77,7 @@ const SkillsSection = () => {
             item.classList.add('active');
             
             // Add custom animation class based on scroll direction
-            if (setScrollDirection.current === 'up') {
+            if (scrollDirectionRef.current === 'up') {
               item.classList.add('reverse-animate');
             } else {
               item.classList.remove('reverse-animate');
@@ -97,7 +98,7 @@ const SkillsSection = () => {
             entry.target.classList.add('active');
             
             // Add custom animation class based on scroll direction
-            if (setScrollDirection.current === 'up') {
+            if (scrollDirectionRef.current === 'up') {
               entry.target.classList.add('reverse-animate');
             } else {
               entry.target.classList.remove('reverse-animate');
