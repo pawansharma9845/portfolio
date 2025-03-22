@@ -11,7 +11,7 @@ const ParticleBackground = () => {
       moveParticlesOnHover={true}
       particleHoverFactor={0.5}
       alphaParticles={true}
-      particleBaseSize={80}
+      particleBaseSize={90}
       sizeRandomness={1.2}
       cameraDistance={25}
       className="particle-canvas absolute top-0 left-0 w-full h-full"

@@ -16,7 +16,7 @@ import {
 const skills = [
   { 
     category: "Frontend", 
-    items: ["React", "Vue.js", "Angular", "HTML/CSS", "JavaScript", "TypeScript"],
+    items: ["React", "HTML", "CSS", "JavaScript"],
     icon: (props: any) => (
       <motion.div 
         className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple"
@@ -34,8 +34,27 @@ const skills = [
     )
   },
   { 
+    category: "DevOps", 
+    items: ["AWS", "CI/CD", "Git", "Linux"],
+    icon: (props: any) => (
+      <motion.div 
+        className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple"
+        whileHover={{ scale: 1.1, rotate: -5 }}
+        initial={{ opacity: 0.8 }}
+        animate={{ 
+          boxShadow: ["0 0 0 rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.5)", "0 0 0 rgba(139, 92, 246, 0)"],
+        }}
+        transition={{ 
+          boxShadow: { repeat: Infinity, duration: 2, ease: "easeInOut", delay: 1.5 }
+        }}
+      >
+        <Terminal className="w-full h-full text-purple group-hover:text-white" {...props} />
+      </motion.div>
+    )
+  },
+  { 
     category: "Backend", 
-    items: ["Node.js", "Express", "NestJS", "Python", "Django", "Ruby on Rails"],
+    items: ["Node.js",  "Python(On Progress)", "Django(On Progress)"],
     icon: (props: any) => (
       <motion.div 
         className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple"
@@ -71,25 +90,7 @@ const skills = [
       </motion.div>
     )
   },
-  { 
-    category: "DevOps", 
-    items: ["AWS", "CI/CD", "Git", "Linux"],
-    icon: (props: any) => (
-      <motion.div 
-        className="flex items-center justify-center w-12 h-12 bg-purple bg-opacity-20 rounded-lg p-3 transition-all duration-300 group-hover:bg-purple"
-        whileHover={{ scale: 1.1, rotate: -5 }}
-        initial={{ opacity: 0.8 }}
-        animate={{ 
-          boxShadow: ["0 0 0 rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.5)", "0 0 0 rgba(139, 92, 246, 0)"],
-        }}
-        transition={{ 
-          boxShadow: { repeat: Infinity, duration: 2, ease: "easeInOut", delay: 1.5 }
-        }}
-      >
-        <Terminal className="w-full h-full text-purple group-hover:text-white" {...props} />
-      </motion.div>
-    )
-  }
+  
 ];
 
 const SkillsSection = () => {

@@ -1,6 +1,6 @@
 
 import { NavLink } from 'react-router-dom';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail,Facebook } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -15,13 +15,13 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex space-x-4">
               <a 
-                href="https://github.com" 
+                href="https://www.facebook.com/profile.php?id=100071114891556" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-purple transition-colors duration-300"
-                aria-label="GitHub"
+                aria-label="Facebok"
               >
-                <Github size={20} />
+                <Facebook size={20} />
               </a>
               <a 
                 href="https://linkedin.com" 
@@ -33,7 +33,7 @@ const Footer = () => {
                 <Linkedin size={20} />
               </a>
               <a 
-                href="mailto:info@example.com"
+                href="mailto:pawan.sharma9845@gmail.com"
                 className="text-gray-400 hover:text-purple transition-colors duration-300"
                 aria-label="Email"
               >
