@@ -8,11 +8,12 @@ const Contact = () => {
   const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
   const lastScrollTop = useRef(0);
   const isScrolling = useRef(false);
+  const scrollTimer = useRef<number | null>(null);
   
   useEffect(() => {
     const handleScroll = () => {
-      // Prevent animation conflicts by setting a flag
       if (isScrolling.current) return;
+      
       isScrolling.current = true;
       
       const st = window.pageYOffset || document.documentElement.scrollTop;
@@ -32,7 +33,6 @@ const Contact = () => {
         if (revealTop < window.innerHeight - revealPoint) {
           reveal.classList.add('active');
           
-          // Add direction-based animation class
           if (scrollDirection === 'up') {
             reveal.classList.add('reverse-animate');
           } else {
@@ -41,16 +41,27 @@ const Contact = () => {
         }
       });
       
-      // Reset the scrolling flag after a short delay
-      setTimeout(() => {
+      // Clear any existing timer
+      if (scrollTimer.current !== null) {
+        window.clearTimeout(scrollTimer.current);
+      }
+      
+      // Set a longer timeout to prevent rapid animation changes
+      scrollTimer.current = window.setTimeout(() => {
         isScrolling.current = false;
-      }, 50);
+        scrollTimer.current = null;
+      }, 200);
     };
     
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check on mount
     
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimer.current !== null) {
+        window.clearTimeout(scrollTimer.current);
+      }
+    };
   }, [scrollDirection]);
   
   return (
