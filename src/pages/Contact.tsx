@@ -7,13 +7,18 @@ import ContactForm from '../components/ContactForm';
 const Contact = () => {
   const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
   const lastScrollTop = useRef(0);
+  const isScrolling = useRef(false);
   
   useEffect(() => {
     const handleScroll = () => {
+      // Prevent animation conflicts by setting a flag
+      if (isScrolling.current) return;
+      isScrolling.current = true;
+      
       const st = window.pageYOffset || document.documentElement.scrollTop;
       if (st > lastScrollTop.current) {
         setScrollDirection('down');
-      } else {
+      } else if (st < lastScrollTop.current) {
         setScrollDirection('up');
       }
       lastScrollTop.current = st <= 0 ? 0 : st;
@@ -35,6 +40,11 @@ const Contact = () => {
           }
         }
       });
+      
+      // Reset the scrolling flag after a short delay
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 50);
     };
     
     window.addEventListener('scroll', handleScroll);

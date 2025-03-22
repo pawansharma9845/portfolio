@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
@@ -21,13 +22,18 @@ const projectsData = [
 const Index = () => {
   const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
   const lastScrollTop = useRef(0);
+  const isScrolling = useRef(false);
   
   useEffect(() => {
     const handleScroll = () => {
+      // Prevent animation conflicts by setting a flag
+      if (isScrolling.current) return;
+      isScrolling.current = true;
+      
       const st = window.pageYOffset || document.documentElement.scrollTop;
       if (st > lastScrollTop.current) {
         setScrollDirection('down');
-      } else {
+      } else if (st < lastScrollTop.current) {
         setScrollDirection('up');
       }
       lastScrollTop.current = st <= 0 ? 0 : st;
@@ -47,18 +53,20 @@ const Index = () => {
           } else {
             reveal.classList.remove('reverse-animate');
           }
-        } else {
-          // Optional: Remove the active class when element is out of view
-          // reveal.classList.remove('active');
         }
       });
+      
+      // Reset the scrolling flag after a short delay
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 50);
     };
     
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check on mount
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrollDirection]); // Add scrollDirection to dependency array
+  }, [scrollDirection]);
   
   return (
     <div className="pt-28">
