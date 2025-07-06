@@ -18,10 +18,10 @@ To work on this project locally:
 
 ```bash
 # Step 1: Clone the repository using your Git URL
-git clone <https://github.com/pawansharma9845/portfolio>
+git clone https://github.com/pawansharma9845/portfolio
 
 # Step 2: Move into the project directory
-cd <portfolio>
+cd portfolio
 
 # Step 3: Install the dependencies
 npm install
