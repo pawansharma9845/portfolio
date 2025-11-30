@@ -33,6 +33,12 @@ const ProjectCard = ({
         <img 
           src={imageUrl} 
           alt={title} 
+          loading="lazy"
+          onError={(e) => {
+            const target = e.currentTarget as HTMLImageElement;
+            if (target.src.endsWith('/placeholder.svg')) return;
+            target.src = '/placeholder.svg';
+          }}
           className="w-full h-56 object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">

@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/myport/",  // Changed from "/portfolio/" to "/" for Netlify
+  base: "/",  // Root base for Netlify custom domain
   build: {
     outDir: "dist",
     assetsDir: "assets",
